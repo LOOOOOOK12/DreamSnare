@@ -42,14 +42,14 @@ function SignUp() {
                 <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
                     <div className='flex flex-col'>
                         <label className='mb-2'>Enter Username:</label>
-                        <input type="text" name="username" 
+                        <input type="text" name="username" placeholder='exampleUsername'
                             className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
                             onChange={handleChange}    
                         />
                     </div>
                     <div className='flex flex-col'>
                         <label className='mb-2'>Enter Email:</label>
-                        <input type="text" name="email" 
+                        <input type="text" name="email" placeholder='example@email.com'
                             className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
                             onChange={handleChange}
                         />
