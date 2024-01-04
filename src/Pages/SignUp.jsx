@@ -63,11 +63,11 @@ function SignUp() {
                     </div>
                     <div className='flex flex-col'>
                         <label className='mb-2'>Confirm Password:</label>
-                        <input type="password" name="ConfirmPasswrod" 
+                        <input type="password" name="confirmPassword" 
                             className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
                             onChange={handleChange}
                         />
-                        {passwordError && <p className='text-error text-sm'>{passwordError}</p>}
+                        {passwordError && <span className='text-error text-sm'>{passwordError}</span>}
                     </div>
                     <button type='submit' className='w-full py-3 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Create Account</button>
                     <Link to='/' className='text-sm'>Already have an account?<span className='font-semibold'> Login</span></Link>
