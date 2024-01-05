@@ -9,6 +9,7 @@ function Home() {
             <div className=" px-10 py-10 mt-28 grid grid-cols-3 gap-5 ">
                 {TestData.map((t)=>(
                     <DreamContainer
+                        userName={t.userName}
                         dreamName={t.dreamName}
                         dreamDate={t.dreamDate}
                         dreamDescription={t.dreamDescription}
