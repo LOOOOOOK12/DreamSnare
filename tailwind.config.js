@@ -15,6 +15,8 @@ export default {
       'accent': '#8b54d0',
       'error': '#dc2626',
       'errordark': '#b91c1c',
+      'yes':'#16a34a',
+      'yesdark':'#15803d'
     },     
   },
   plugins: [],
