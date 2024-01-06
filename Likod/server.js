@@ -23,6 +23,7 @@ const db = mysql.createConnection({
     database:'website'
 })
 
+//Create Account
 app.post('/signup',(req,res) => {
     const sql = "INSERT INTO user (`username`,`email`,`password`) Values (?) ";
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) =>{
@@ -41,7 +42,6 @@ app.post('/signup',(req,res) => {
 })
 
 //Middleware
-
 const verifyUser = (req, res, next) => {
     const token = req.cookies.token
     if(!token){
@@ -62,7 +62,6 @@ const verifyUser = (req, res, next) => {
 app.get('/', verifyUser, (req, res) =>{
     return res.json({Status: "Success", name: req.username});
 });
-
 
 //LOGIN
 app.post('/', (req, res) => {
@@ -91,6 +90,20 @@ app.post('/', (req, res) => {
 app.get('/logout',(req,res) => {
     res.clearCookie('token')
     return res.json({Status:"Success"})
+})
+
+//Create Dream
+app.post('/createDream', (req,res) =>{
+    const sql = "INSERT INTO dreams (`DreamName`,`DreamDate`,`DreamDescription`) VALUES (?)"
+    const values = [
+        req.body.DreamName,
+        req.body.DreamDate,
+        req.body.DreamDescription,
+    ]
+    db.query(sql, [values], (err, data) =>{
+        if(err) return res.json(err)
+        return res.json("created")
+    })
 })
 
 app.listen(8001, ()=> {
