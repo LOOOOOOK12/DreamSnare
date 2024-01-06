@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Create from '../Modals/Create'
 import LogOut from '../Modals/LogOut'
 
-function Navbar() {
+function Navbar({user_ID}) {
 
     const [showModal, setShowModal] = useState(false)
     const [logOut, setShowLogOut] = useState(false)
@@ -20,7 +20,9 @@ function Navbar() {
                         onClick={()=>setShowLogOut(true)}
                     >Log-Out</button>
                 </div>
-                {showModal && <Create onClose={() => setShowModal(false)}/>}
+                {showModal && <Create
+                    onClose={() => setShowModal(false)}
+                    user_ID={user_ID}/>}
                 {logOut && <LogOut onClose={() => setShowLogOut(false)}/>}
             </nav>
         </div>
