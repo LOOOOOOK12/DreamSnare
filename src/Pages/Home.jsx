@@ -33,7 +33,7 @@ function Home() {
             <div className="pt-48 flex items-center justify-center">
                 {
                     auth ? 
-                        <h1 className="text-text text-5xl">Welcome to DreamSnare---- {username}</h1>
+                        <h1 className="text-text text-5xl">Welcome to DreamSnare {username}!!</h1>
                     :
                         <div>
                             <h1 className="text-text text-5xl">may problem--- {message}</h1>
