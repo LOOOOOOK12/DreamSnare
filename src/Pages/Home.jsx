@@ -6,6 +6,7 @@ import axios from "axios"
 
 function Home() {
 
+    const [dreams, setDreams] = useState([]);
     const [auth , setAuth] = useState(false)
     const [message, setMessage] = useState('')
     const [username, setName] = useState('')
@@ -26,10 +27,15 @@ function Home() {
             .catch(err => console.log(err));
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:8001')
+            .then(res => setDreams(res.data))
+            .catch(err => console.log(err));
+    }, []);
+
     return (
         <div className='bg-background flex flex-col'>
             <Navbar/>
-
             <div className="pt-48 flex items-center justify-center">
                 {
                     auth ? 
