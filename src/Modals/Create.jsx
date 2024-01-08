@@ -19,7 +19,7 @@ function Create({onClose, user_ID}) {
     const [values, setValues] = useState({
         DreamName: '',
         DreamDate: '',
-        DreamsDescription: ''
+        DreamDescription: ''
     });
 
     
@@ -29,7 +29,6 @@ function Create({onClose, user_ID}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         axios.post('http://localhost:8001/createDream', { ...values, user_ID })
             .then(res => {
                 console.log("Dream Created");
@@ -60,10 +59,11 @@ function Create({onClose, user_ID}) {
                 <label className='my-6'>Describe your dream!</label>
                 <textarea 
                     type ='text'
-                    name='DreamsDescription' 
+                    name='DreamDescription' 
                     rows={10} cols={20} 
                     className='p-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
-                    onChange={handleChange} ></textarea>
+                    onChange={handleChange} 
+                />
                     <div className='mt-6 justify-end flex gap-4'>
                         <button onClick={onClose} className='py-3 px-5 rounded-md text-text bg-error text-white hover:bg-errordark ease-in-out duration-300'>Cancel</button>
                         <button  type='submit' className='py-3 px-5 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Submit</button>
