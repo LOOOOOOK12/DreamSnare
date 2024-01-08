@@ -4,6 +4,7 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const salt = 10;
 
@@ -25,12 +26,12 @@ const db = mysql.createConnection({
 
 //Create Account
 app.post('/signup',(req,res) => {
-    const sql = "INSERT INTO user (`username`,`email`,`password`) Values (?) ";
+    const sql = "INSERT INTO user (`user_ID`,`email`,`password`) Values (?) ";
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) =>{
         if(err) return res.json({Error:"Error for hasshing password"});
     
         const values = [
-            req.body.username,
+            req.body.user_ID,
             req.body.email,
             hash
         ]
@@ -48,11 +49,11 @@ const verifyUser = (req, res, next) => {
         return res.json({Error: "You are not authenticated"})
     } 
     else{
-        jwt.verify(token, "jwts-secret-key", (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
             if(err){
                 return res.json({Error:"Token is not okay"})
             } else{
-                req.username = decoded.username
+                req.user_ID = decoded.user_ID
                 next();
             }
         })
@@ -60,7 +61,7 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get('/', verifyUser, (req, res) =>{
-    return res.json({Status: "Success", name: req.username});
+    return res.json({Status: "Success", name: req.user_ID});
 });
 
 //LOGIN
@@ -72,8 +73,9 @@ app.post('/', (req, res) => {
             bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
                 if(err) return res.json({Error: "password compare error"})
                 if(response){
-                    const username= data[0].username;
-                    const token = jwt.sign({username}, "jwts-secret-key", {expiresIn: '1d'})
+                    const user_ID = data[0].user_ID;
+                    const token = jwt.sign({user_ID}, process.env.SECRET_KEY, {expiresIn: '1d'})
+                    console.log(token)
                     res.cookie('token', token)
                     return res.json({Status: "Success"})
                 } else{
@@ -93,17 +95,26 @@ app.get('/logout',(req,res) => {
 })
 
 //Create Dream
-app.post('/createDream', (req,res) =>{
-    const sql = "INSERT INTO dreams (`DreamName`,`DreamDate`,`DreamDescription`) VALUES (?)"
+app.post('/createDream', verifyUser, (req,res) => {
+    const userId = req.user_ID 
+    const sql = "INSERT INTO dreams (`DreamName`,`DreamDate`,`DreamDescription`, `user_ID`) VALUES (?)"
     const values = [
         req.body.DreamName,
         req.body.DreamDate,
         req.body.DreamDescription,
+        userId
     ]
-    db.query(sql, [values], (err, data) =>{
+    
+    db.query(sql, [values], (err, data) => {
         if(err) return res.json(err)
         return res.json("created")
     })
+})
+
+//Get Dreams
+app.get('/getDreams',(req, res) => {
+    const sql = "SELECT * FROM dreams WHERE user_ID = ?"
+    db.query(sql, values)
 })
 
 app.listen(8001, ()=> {
