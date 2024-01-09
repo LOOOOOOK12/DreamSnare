@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -13,8 +12,6 @@ function Create({onClose, user_ID}) {
             onClose();
         }
     }
-
-    const navigate = useNavigate();
 
     const [values, setValues] = useState({
         DreamName: '',
@@ -33,6 +30,7 @@ function Create({onClose, user_ID}) {
             .then(res => {
                 console.log("Dream Created");
                 onClose();
+                window.location.reload();
             })
             .catch(err => console.log(err));
     };
