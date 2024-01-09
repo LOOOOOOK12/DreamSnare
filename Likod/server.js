@@ -26,12 +26,13 @@ const db = mysql.createConnection({
 
 //Create Account
 app.post('/signup',(req,res) => {
-    const sql = "INSERT INTO user (`user_ID`,`email`,`password`) Values (?) ";
+    const sql = "INSERT INTO user (`user_ID`,`username`,`email`,`password`) Values (?) ";
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) =>{
         if(err) return res.json({Error:"Error for hasshing password"});
     
         const values = [
             req.body.user_ID,
+            req.body.username,
             req.body.email,
             hash
         ]
@@ -54,6 +55,7 @@ const verifyUser = (req, res, next) => {
                 return res.json({Error:"Token is not okay"})
             } else{
                 req.user_ID = decoded.user_ID
+                req.username = decoded.username
                 next();
             }
         })
@@ -61,7 +63,7 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get('/', verifyUser, (req, res) =>{
-    return res.json({Status: "Success", name: req.user_ID});
+    return res.json({Status: "Success", user_ID: req.user_ID , username: req.username});
 });
 
 //LOGIN
@@ -74,8 +76,8 @@ app.post('/', (req, res) => {
                 if(err) return res.json({Error: "password compare error"})
                 if(response){
                     const user_ID = data[0].user_ID;
-                    const token = jwt.sign({user_ID}, process.env.SECRET_KEY, {expiresIn: '1d'})
-                    console.log(token)
+                    const username = data[0].username;
+                    const token = jwt.sign({user_ID,username}, process.env.SECRET_KEY, {expiresIn: '1d'})
                     res.cookie('token', token)
                     return res.json({Status: "Success"})
                 } else{
@@ -104,7 +106,6 @@ app.post('/createDream', verifyUser, (req,res) => {
         req.body.DreamDescription,
         userId
     ]
-    
     db.query(sql, [values], (err, data) => {
         if(err) return res.json(err)
         return res.json("created")
@@ -112,10 +113,17 @@ app.post('/createDream', verifyUser, (req,res) => {
 })
 
 //Get Dreams
-app.get('/getDreams',(req, res) => {
-    const sql = "SELECT * FROM dreams WHERE user_ID = ?"
-    db.query(sql, values)
-})
+app.get('/getDreams', verifyUser, (req, res) => {
+    const user_ID = req.user_ID; 
+    const sql = "SELECT * FROM dreams WHERE user_ID = ?";
+    db.query(sql, [user_ID], (err, results) => {
+        if (err) {
+            return res.status(500).json({ Error: "Internal Server Error" });
+        }
+        return res.json(results);
+    });
+});
+
 
 app.listen(8001, ()=> {
     console.log("Server is Open")
