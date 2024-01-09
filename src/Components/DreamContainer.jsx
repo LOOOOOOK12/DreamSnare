@@ -19,9 +19,9 @@ function DreamContainer({userName,dreamName, dreamDate, dreamDescription}) {
                 <h1>Dream Date</h1>
                 <h1>{dreamDate}</h1>
             </div>
-            <p className='p-3 mt-6 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'>
+            <textarea rows={10} cols={20} className='p-3 mt-6 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'>
                 {dreamDescription}
-            </p>
+            </textarea>
             <div className='mt-5 flex justify-end gap-4'>
                 <button onClick={() => setShowDelete(true)} className='py-3 px-7 rounded-md bg-error font-semibold text-white hover:bg-errordark ease-in-out duration-300'>Delete</button>
                 <button onClick={() => setShowEdit(true)} className='py-3 px-7 rounded-md text-background font-semibold  bg-primary hover:bg-accent ease-in-out duration-300'>Edit</button>
