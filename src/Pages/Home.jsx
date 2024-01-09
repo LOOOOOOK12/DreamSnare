@@ -1,15 +1,15 @@
 import Navbar from "../Components/Navbar"
 import DreamContainer from "../Components/DreamContainer"
-import { TestData } from "../constants/test"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
 function Home() {
 
-    const [dreams, setDreams] = useState([]);
+    const [dreams, setDreams] = useState([])
     const [auth , setAuth] = useState(false)
     const [message, setMessage] = useState('')
-    const [username, setName] = useState('')
+    const [username, setUserName] = useState('')
+    const [userID, setUserID] = useState('')
 
     axios.defaults.withCredentials = true
 
@@ -18,7 +18,8 @@ function Home() {
             .then(res => {
                 if (res.data.Status === "Success") {
                     setAuth(true);
-                    setName(res.data.name);
+                    setUserName(res.data.username);
+                    setUserID(res.data.user_ID)
                 } else {
                     setAuth(false);
                     setMessage(res.data.Error);
@@ -28,10 +29,10 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:8001')
+        axios.get('http://localhost:8001/getDreams')
             .then(res => setDreams(res.data))
             .catch(err => console.log(err));
-    }, []);
+    }, [auth, username]);
 
     return (
         <div className='bg-background flex flex-col'>
@@ -48,13 +49,13 @@ function Home() {
                 }
             </div>
             <div className=" px-10 py-10 mt-28 grid grid-cols-3 gap-5 ">
-                {TestData.map((t,idx)=>(
+                {dreams.map((dream, idx)=>(
                     <div key={idx}>
                         <DreamContainer
-                        userName={t.userName}
-                        dreamName={t.dreamName}
-                        dreamDate={t.dreamDate}
-                        dreamDescription={t.dreamDescription}
+                        userName={username}
+                        dreamName={dream.DreamName}
+                        dreamDate={dream.DreamDate}
+                        dreamDescription={dream.DreamDescription}
                     />
                     </div>
                 ))}
