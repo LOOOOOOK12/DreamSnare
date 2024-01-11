@@ -10,6 +10,16 @@ function Delete({onClose}) {
         }
     }
 
+    const deleteFriend = (id) => {
+        axios
+        .delete('http://localhost:8001//deleteDream' + id)
+        .then((res) => {
+            console.log(res);
+            window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    };
+
     return (
         <div ref={modalRef} onClick={closeModal} className='fixed inset-0 flex justify-center items-center text-text bg-background bg-opacity-70 backdrop-blur-sm z-50'>
             <div className='px-16 py-8 flex flex-col justify-center items-center gap-4 bg-container2 rounded-md'>
