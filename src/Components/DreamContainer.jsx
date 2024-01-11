@@ -1,12 +1,24 @@
-import React from 'react'
-import { useState } from 'react'
-import Edit from '../Modals/Edit'
-import Delete from '../Modals/Delete'
+import React, { useState } from 'react';
+import Edit from '../Modals/Edit';
+import Delete from '../Modals/Delete';
 
-function DreamContainer({userName,dreamName, dreamDate, dreamDescription}) {
+function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, dream_ID }) {
+    const [showEdit, setShowEdit] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [selectedDreamId, setSelectedDreamId] = useState(null);
 
-    const [showEdit, setShowEdit] = useState(false)
-    const [showDelete, setShowDelete] = useState(false)
+    const handleEditClick = () => {
+        setSelectedDreamId(dream_ID);
+        setShowEdit(true);
+    };
+
+    const handleModalSubmit = (updatedDreamData) => {
+        // Handle the submission of the edited dream data
+        // You can send the updated data to your server or perform any necessary actions
+        // ...
+        
+        setShowEdit(false); // Close the Edit modal after submission
+    };
 
     return (
         <div className='py-12 px-8 bg-container2 flex flex-col text-text rounded-lg'>
@@ -19,17 +31,39 @@ function DreamContainer({userName,dreamName, dreamDate, dreamDescription}) {
                 <h1>Dream Date</h1>
                 <h1>{dreamDate}</h1>
             </div>
-            <textarea rows={10} cols={20} className='p-3 mt-6 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'>
+            <textarea
+                disabled
+                rows={10}
+                cols={20}
+                className='p-3 mt-6 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
+            >
                 {dreamDescription}
             </textarea>
             <div className='mt-5 flex justify-end gap-4'>
-                <button onClick={() => setShowDelete(true)} className='py-3 px-7 rounded-md bg-error font-semibold text-white hover:bg-errordark ease-in-out duration-300'>Delete</button>
-                <button onClick={() => setShowEdit(true)} className='py-3 px-7 rounded-md text-background font-semibold  bg-primary hover:bg-accent ease-in-out duration-300'>Edit</button>
+                <button
+                    onClick={() => setShowDelete(true)}
+                    className='py-3 px-7 rounded-md bg-error font-semibold text-white hover:bg-errordark ease-in-out duration-300'
+                >
+                    Delete
+                </button>
+                <button
+                    onClick={handleEditClick}
+                    className='py-3 px-7 rounded-md text-background font-semibold  bg-primary hover:bg-accent ease-in-out duration-300'
+                >
+                    Edit
+                </button>
             </div>
-            {showEdit && <Edit onClose = {() => setShowEdit(false)}/>}
-            {showDelete && <Delete onClose = {() => setShowDelete(false)}/>}
+            {showEdit && (
+                <Edit
+                    onClose={() => setShowEdit(false)}
+                    dream_ID={selectedDreamId}
+                    initialData={{ dreamName, dreamDate, dreamDescription }}
+                    onSubmit={handleModalSubmit}
+                />
+            )}
+            {showDelete && <Delete onClose={() => setShowDelete(false)} />}
         </div>
-    )
+    );
 }
 
-export default DreamContainer
+export default DreamContainer;
