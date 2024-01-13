@@ -35,9 +35,9 @@ function Home() {
     }, [auth, username]);
 
     return (
-        <div className='bg-background flex flex-col'>
+        <div className='bg-background flex flex-col justify-center'>
             <Navbar/>
-            <div className="pt-48 flex items-center justify-center">
+            <div className="pt-48 w-1/2 text-center flex items-center justify-center">
                 {
                     auth ? 
                         <h1 className="text-text text-5xl">Welcome to DreamSnare {username}!!</h1>
@@ -48,7 +48,7 @@ function Home() {
                         
                 }
             </div>
-            <div className=" px-10 py-10 mt-28 grid grid-cols-3 gap-5 ">
+            <div className=" px-10 py-10 mt-28 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
                 {dreams.map((dream, idx)=>(
                     <div key={idx}>
                         <DreamContainer
