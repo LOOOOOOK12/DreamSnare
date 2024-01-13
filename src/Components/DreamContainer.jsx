@@ -12,12 +12,8 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
         setShowEdit(true);
     };
 
-    const handleModalSubmit = (updatedDreamData) => {
-        // Handle the submission of the edited dream data
-        // You can send the updated data to your server or perform any necessary actions
-        // ...
-        
-        setShowEdit(false); // Close the Edit modal after submission
+    const handleModalSubmit = (updatedDreamData) => { 
+        setShowEdit(false); 
     };
 
     return (
