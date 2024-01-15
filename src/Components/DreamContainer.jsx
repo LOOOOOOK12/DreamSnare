@@ -2,19 +2,38 @@ import React, { useState } from 'react';
 import Edit from '../Modals/Edit';
 import Delete from '../Modals/Delete';
 
-function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, dream_ID }) {
+function DreamContainer({ userName, dreamName, dreamDate, dreamDescription}) {
+
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
-    const [selectedDreamId, setSelectedDreamId] = useState(null);
+    const [selectedDreamID, setSelectedDreamID] = useState(null);
+    const [dream, setDream] = useState([]);
 
     const handleEditClick = () => {
-        setSelectedDreamId(dream_ID);
         setShowEdit(true);
+        setSelectedDreamID(dreamID);
     };
 
-    const handleModalSubmit = (updatedDreamData) => { 
-        setShowEdit(false); 
-    };
+    const handleModalSubmit = (updatedDreamData) => {
+        
+        setDream((prevDreams) =>
+            prevDreams.map((dream) =>
+                dream._id === selectedDreamID ? { ...dream, ...updatedDreamData } : dream
+            )
+            );
+            setShowEdit(false);
+        };
+
+        const deleteFriend = (id) => {
+            axios
+            .delete('http://localhost:8001//deleteDream' + id)
+            .then((res) => {
+                console.log(res);
+                onClose();
+                window.location.reload();
+            })
+            .catch((err) => console.log(err));
+        };
 
     return (
         <div className='py-12 px-8 bg-container2 flex flex-col text-text rounded-lg'>
@@ -44,17 +63,21 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
                 </button>
                 <button
                     onClick={handleEditClick}
-                    className='py-3 px-7 rounded-md text-background font-semibold  bg-primary hover:bg-accent ease-in-out duration-300'
+                    className='py-3 px-7 rounded-md text-background font-semibold bg-primary hover:bg-accent ease-in-out duration-300'
                 >
                     Edit
                 </button>
             </div>
-            {showEdit && (
+            {showEdit &&  (
                 <Edit
                     onClose={() => setShowEdit(false)}
-                    dream_ID={selectedDreamId}
-                    initialData={{ dreamName, dreamDate, dreamDescription }}
                     onSubmit={handleModalSubmit}
+                    dream={{
+                        DreamName: dreamName,
+                        DreamDate: dreamDate,
+                        DreamDescription: dreamDescription,
+                    }}
+                    dreamID={selectedDreamID} // Pass the dream ID to the Edit modal
                 />
             )}
             {showDelete && <Delete onClose={() => setShowDelete(false)} />}
