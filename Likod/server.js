@@ -124,24 +124,24 @@ app.get('/getDreams', verifyUser, (req, res) => {
     });
 });
 
+
 // Edit Dreams
 app.put('/editDream/:dream_ID', verifyUser, (req, res) => {
-    const sql = "UPDATE dreams SET DreamName=?, DreamDate=?, DreamDescription=? WHERE dream_ID=?";
-    const values = [
-        req.body.DreamName, 
-        req.body.DreamDate, 
-        req.body.DreamDescription, 
-    ];
     const dream_ID = req.params.dream_ID;
+    const { DreamName, DreamDate, DreamDescription } = req.body;
 
-    db.query(sql, [...values, dream_ID], (err, results) => {
-        if (err) { 
+    const sql = "UPDATE dreams SET DreamName=?, DreamDate=?, DreamDescription=? WHERE dream_ID=?";
+    const values = [DreamName, DreamDate, DreamDescription, dream_ID];
+
+    db.query(sql, values, (err, results) => {
+        if (err) {
             return res.status(500).json({ Error: "Internal Server Error" });
         }
         console.log(values)
-        return res.json(results);
+        return res.json("updated");
     });
 });
+
 
 // Delete Dreams
 app.delete('/deleteDream/:dream_ID', verifyUser, (req, res) => {
