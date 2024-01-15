@@ -15,6 +15,7 @@ function Delete({onClose}) {
         .delete('http://localhost:8001//deleteDream' + id)
         .then((res) => {
             console.log(res);
+            onClose();
             window.location.reload();
         })
         .catch((err) => console.log(err));
@@ -26,7 +27,7 @@ function Delete({onClose}) {
                 <h1 className='text-2xl'>Are you sure to delete your Dream?</h1>
                 <div className='flex gap-6'>
                     <button onClick={onClose} className = 'py-3 px-8 bg-error hover:bg-errordark rounded-md'>No</button>
-                    <button onClick={onClose} className = 'py-3 px-8 bg-yes hover:bg-yesdark rounded-md'>Yes</button>
+                    <button onClick={deleteFriend} className = 'py-3 px-8 bg-yes hover:bg-yesdark rounded-md'>Yes</button>
                 </div>
             </div>  
         </div>
