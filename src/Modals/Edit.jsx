@@ -1,7 +1,7 @@
 import React, { useRef, useEffect,useState } from 'react';
 import axios from 'axios';
 
-function Edit({ onClose, onSubmit, dream, dreamID}) {
+function Edit({ onClose, onSubmit, dream}) {
     const modalRef = useRef();
 
     const [formData, setFormData] = useState({
