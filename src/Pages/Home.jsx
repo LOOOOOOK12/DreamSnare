@@ -56,6 +56,7 @@ function Home() {
                         dreamName={dream.DreamName}
                         dreamDate={dream.DreamDate}
                         dreamDescription={dream.DreamDescription}
+                        dreamID={dream.dream_ID}
                     />
                     </div>
                 ))}
