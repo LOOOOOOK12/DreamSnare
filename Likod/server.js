@@ -11,7 +11,7 @@ const salt = 10;
 const app = express()
 app.use(cors({
     origin: ["http://localhost:5173"],
-    methods: ["POST", "GET","PUT"],
+    methods: ["POST", "GET","PUT, DELETE"],
     credentials: true
 }));
 app.use(express.json())
@@ -144,16 +144,16 @@ app.put('/editDream/:dream_ID', verifyUser, (req, res) => {
 
 
 // Delete Dreams
-app.delete('/deleteDream/:dream_ID', verifyUser, (req, res) => {
-    const sql = "DELETE from dreams where dream_ID=?";
+app.delete('/deleteDream/:dream_ID', (req, res) => {
+    const sql = "DELETE FROM dreams where dream_ID=?";
     const dream_ID = req.params.dream_ID
 
     db.query(sql, [dream_ID], (err, results) => {
         if (err) { 
             return res.status(500).json({ Error: "Internal Server Error" });
         }
-        console.log(values)
-        return res.json(results);
+        console.log(dream_ID)
+        return res.json("deleted");
     });
 });
 
