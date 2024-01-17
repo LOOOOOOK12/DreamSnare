@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import Edit from '../Modals/Edit';
 import Delete from '../Modals/Delete';
+import axios from 'axios';
 
-function DreamContainer({ userName, dreamName, dreamDate, dreamDescription}) {
+
+
+function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, dreamID}) {
 
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [selectedDreamID, setSelectedDreamID] = useState(null);
+    const [deleteDreamID, setDeleteDreamID] = useState(null);
     const [dream, setDream] = useState([]);
 
-    const handleEditClick = () => {
+    const handleEditClick = (id) => {
+        setSelectedDreamID(id)
         setShowEdit(true);
-        setSelectedDreamID(dreamID);
     };
+
+    const handleDeleteClick = (id) => {
+        setDeleteDreamID(id)
+        setShowDelete(true);
+    };
+
 
     const handleModalSubmit = (updatedDreamData) => {
         
@@ -26,10 +36,9 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription}) {
 
         const deleteFriend = (id) => {
             axios
-            .delete('http://localhost:8001//deleteDream' + id)
+            .delete(`http://localhost:8001/deleteDream/${id}`)
             .then((res) => {
-                console.log(res);
-                onClose();
+                console.log("dream deleted");
                 window.location.reload();
             })
             .catch((err) => console.log(err));
@@ -70,17 +79,22 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription}) {
             </div>
             {showEdit &&  (
                 <Edit
-                    onClose={() => setShowEdit(false)}
-                    onSubmit={handleModalSubmit}
-                    dream={{
+                    onClose = {() => setShowEdit(false)}
+                    onSubmit = {handleModalSubmit}
+                    dream = {{
                         DreamName: dreamName,
                         DreamDate: dreamDate,
                         DreamDescription: dreamDescription,
                     }}
-                    dreamID={selectedDreamID} // Pass the dream ID to the Edit modal
+                    dreamID={selectedDreamID}
                 />
             )}
-            {showDelete && <Delete onClose={() => setShowDelete(false)} />}
+            {showDelete && (
+                <Delete
+                    onYes={() => deleteFriend()}
+                    onClose={() => setShowDelete(false)} 
+                />
+            )}
         </div>
     );
 }
