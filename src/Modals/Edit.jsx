@@ -1,7 +1,7 @@
-import React, { useRef, useEffect,useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Edit({ onClose, onSubmit, dream}) {
+function Edit({ onClose, update, dream, dreamID}) {
     const modalRef = useRef();
 
     const [formData, setFormData] = useState({
@@ -35,10 +35,10 @@ function Edit({ onClose, onSubmit, dream}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios
-            .put(`http://localhost:8001/editDream/${dream._id}`, formData) // Use dreamID here
+            .put(`http://localhost:8001/editDream/${dream}`, formData) // Use dreamID here
             .then((res) => {
                 console.log('Dream Updated');
-                onSubmit(formData);
+                update(formData);
                 onClose();
                 window.location.reload();
             })
