@@ -28,7 +28,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
         
         setDream((prevDreams) =>
             prevDreams.map((dream) =>
-                dream._id === selectedDreamID ? { ...dream, ...updatedDreamData } : dream
+                dream.id === selectedDreamID ? { ...dream, ...updatedDreamData } : dream
             )
             );
             setShowEdit(false);
@@ -43,6 +43,8 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
             })
             .catch((err) => console.log(err));
         };
+
+        
 
     return (
         <div className='py-12 px-8 bg-container2 flex flex-col text-text rounded-lg'>
@@ -65,7 +67,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
             </textarea>
             <div className='mt-5 flex justify-end gap-4'>
                 <button
-                    onClick={() => setShowDelete(true)}
+                    onClick={handleDeleteClick}
                     className='py-3 px-7 rounded-md bg-error font-semibold text-white hover:bg-errordark ease-in-out duration-300'
                 >
                     Delete
@@ -80,7 +82,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
             {showEdit &&  (
                 <Edit
                     onClose = {() => setShowEdit(false)}
-                    onSubmit = {handleModalSubmit}
+                    update = {handleModalSubmit}
                     dream = {{
                         DreamName: dreamName,
                         DreamDate: dreamDate,
@@ -91,7 +93,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
             )}
             {showDelete && (
                 <Delete
-                    onYes={() => deleteFriend()}
+                    onYes={() => deleteFriend(dreamID)}
                     onClose={() => setShowDelete(false)} 
                 />
             )}
