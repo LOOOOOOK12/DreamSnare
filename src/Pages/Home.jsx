@@ -52,12 +52,12 @@ function Home() {
                 {dreams.map((dream, idx)=>(
                     <div key={idx}>
                         <DreamContainer
-                        userName={username}
-                        dreamName={dream.DreamName}
-                        dreamDate={dream.DreamDate}
-                        dreamDescription={dream.DreamDescription}
-                        dreamID={dream.dream_ID}
-                    />
+                            userName={username}
+                            dreamName={dream.DreamName}
+                            dreamDate={dream.DreamDate}
+                            dreamDescription={dream.DreamDescription}
+                            dreamID={dream.dream_ID}
+                        />
                     </div>
                 ))}
             </div>
