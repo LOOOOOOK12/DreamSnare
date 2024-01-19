@@ -10,7 +10,7 @@ function Navbar({user_ID}) {
 
     return (
         <div className=' w-full'>
-            <nav className='px-16 p-4 w-full top-0 z-10 fixed flex justify-between items-center text-center bg-container2 text-text'>
+            <nav className='px-10 py-6 w-full top-0 z-10 fixed flex justify-between items-center text-center bg-container2 text-text'>
                 <h1 className='text-2xl font-semibold cursor-default'>DreamSnare.net</h1>
                 <div className='flex gap-4'>
                     <button className='py-3 px-7 max-[860px]:hidden rounded-md text-background bg-primary font-semibold text-white hover:bg-accent ease-in-out duration-300'
