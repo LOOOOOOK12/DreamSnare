@@ -73,7 +73,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
                     Delete
                 </button>
                 <button
-                    onClick={handleEditClick}
+                    onClick={() => handleEditClick(dreamID)}
                     className='py-3 px-7 rounded-md text-background font-semibold bg-primary hover:bg-accent ease-in-out duration-300'
                 >
                     Edit
@@ -82,7 +82,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
             {showEdit &&  (
                 <Edit
                     onClose = {() => setShowEdit(false)}
-                    update = {handleModalSubmit}
+                    update = {() => handleModalSubmit()}
                     dream = {{
                         DreamName: dreamName,
                         DreamDate: dreamDate,
