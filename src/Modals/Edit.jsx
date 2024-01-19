@@ -35,7 +35,7 @@ function Edit({ onClose, update, dream, dreamID}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios
-            .put(`http://localhost:8001/editDream/${dream}`, formData) // Use dreamID here
+            .put(`http://localhost:8001/editDream/${dreamID}`, formData) 
             .then((res) => {
                 console.log('Dream Updated');
                 update(formData);
@@ -52,26 +52,25 @@ function Edit({ onClose, update, dream, dreamID}) {
         className='fixed inset-0 flex justify-center items-center text-text bg-background bg-opacity-70 backdrop-blur-sm z-50'
         >
         <form
-            onSubmit={handleSubmit}
             className='px-16 py-8 flex flex-col bg-container2 rounded-md text-left transition-all '
         >
-            <div className='flex items-center gap-3'>
-            <label htmlFor=''>Edit your Dream name:</label>
-            <input
-                type='text'
-                name='DreamName'
-                value={formData.DreamName}
-                onChange={handleInputChange}
-                className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
-            />
-            <label htmlFor=''>Edit Date Dreamt:</label>
-            <input
-                type='date'
-                name='DreamDate'
-                value={formData.DreamDate}
-                onChange={handleInputChange}
-                className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
-            />
+            <div className='flex flex-col justify-center md:flex-row md:items-center gap-3'>
+                <label>Edit your Dream name:</label>
+                <input
+                    type='text'
+                    name='DreamName'
+                    value={formData.DreamName}
+                    onChange={handleInputChange}
+                    className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
+                />
+                <label>Edit Date Dreamt:</label>
+                <input
+                    type='date'
+                    name='DreamDate'
+                    value={formData.DreamDate}
+                    onChange={handleInputChange}
+                    className='py-1 px-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
+                />
             </div>
             <label className='my-6'>Edit your dream!</label>
             <textarea
@@ -90,6 +89,7 @@ function Edit({ onClose, update, dream, dreamID}) {
                 Cancel
             </button>
             <button
+                onClick={handleSubmit}
                 type='submit'
                 className='py-3 px-5 font-semibold rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'
             >
