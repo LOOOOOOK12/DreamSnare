@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Create from '../Modals/Create'
 import LogOut from '../Modals/LogOut'
+import { RxHamburgerMenu } from "react-icons/rx";
 
 function Navbar({user_ID}) {
 
@@ -19,6 +20,7 @@ function Navbar({user_ID}) {
                     <button className='py-3 px-7 max-[860px]:hidden rounded-md bg-error font-semibold text-white hover:bg-errordark ease-in-out duration-300'
                         onClick={()=>setShowLogOut(true)}
                     >Log-Out</button>
+                    <RxHamburgerMenu size={35} className='min-[860px]:hidden'/>
                 </div>
                 {showModal && <Create
                     onClose={() => setShowModal(false)}
