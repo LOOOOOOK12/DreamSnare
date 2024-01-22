@@ -37,7 +37,7 @@ function SignUp() {
     };
 
     return (
-        <div className='h-screen flex items-center justify-center bg-background'>
+        <div className='h-screen flex items-center justify-center bg-gradient-to-tl from-gradient1 to-gradient2'>
             <div className='px-10 py-14 flex flex-col gap-6 bg-container2 text-text rounded-md'>
                 <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
                     <div className='flex flex-col'>
