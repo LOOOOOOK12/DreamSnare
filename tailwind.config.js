@@ -16,7 +16,9 @@ export default {
       'error': '#dc2626',
       'errordark': '#b91c1c',
       'yes':'#16a34a',
-      'yesdark':'#15803d'
+      'yesdark':'#15803d',
+      'gradient1':'#090410',
+      'gradient2':'#6a40a5',
     },     
   },
   plugins: [],
