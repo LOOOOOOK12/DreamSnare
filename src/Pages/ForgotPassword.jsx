@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function ForgotPassword() {
     return (
-        <div className='h-screen flex items-center justify-center  text-text'>
+        <div className='h-screen flex items-center justify-center bg-gradient-to-tl from-gradient1 to-gradient2 text-text'>
             <div className='px-10 py-14 flex flex-col gap-6 bg-container2  rounded-md'>
                 <h1 className='font-semibold text-4xl'>Find your Account</h1>
                 <div className='flex flex-col gap-3'>
