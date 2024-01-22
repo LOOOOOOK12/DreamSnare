@@ -35,7 +35,7 @@ function Home() {
     }, [auth, username]);
 
     return (
-        <div className='bg-background flex flex-col justify-center'>
+        <div className='bg-gradient-to-tl from-gradient1 to-gradient2 flex flex-col justify-center'>
             <Navbar/>
             <div className="pt-48 px-12 w-full text-center flex flex-col items-center justify-center">
                 {
