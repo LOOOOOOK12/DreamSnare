@@ -40,7 +40,7 @@ function Create({onClose, user_ID}) {
             <form 
             onSubmit={handleSubmit}
             className="px-16 py-8 flex flex-col bg-container2 rounded-md text-left transition-all ">
-                <div className='flex items-center gap-3'>
+                <div className='flex flex-col justify-center md:flex-row md:items-center gap-3'>
                     <label htmlFor="">Name your Dream:</label>
                     <input 
                         type="text" 
@@ -58,13 +58,13 @@ function Create({onClose, user_ID}) {
                 <textarea 
                     type ='text'
                     name='DreamDescription' 
-                    rows={10} cols={20} 
+                    rows={10} cols={30} 
                     className='p-1 rounded-md bg-container2 border-2 border-accent focus:outline-none focus:border-secondary'
                     onChange={handleChange} 
                 />
                     <div className='mt-6 justify-end flex gap-4'>
                         <button onClick={onClose} className='py-3 px-5 rounded-md text-text bg-error text-white hover:bg-errordark ease-in-out duration-300'>Cancel</button>
-                        <button  type='submit' className='py-3 px-5 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Submit</button>
+                        <button  type='submit' className='py-3 px-5 rounded-md font-semibold text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Submit</button>
                     </div>
             </form> 
         </div>
