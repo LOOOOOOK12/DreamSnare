@@ -24,32 +24,39 @@ function SignUp() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+    
         const newErrors = {};
         for (const key in values) {
             if (!values[key]) {
                 newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`;
             }
         }
-
+    
         if (values.password !== values.confirmPassword) {
             newErrors.confirmPassword = 'Passwords do not match';
         }
-
+    
         if (Object.keys(newErrors).length > 0) {
             setValidationErrors(newErrors);
             return;
         }
-
-        setValidationErrors({}); 
-
+    
+        setValidationErrors({});
+    
         axios.post('http://localhost:8001/signup', values)
             .then(res => {
                 console.log('Registered Successfully!');
                 navigate('/');
             })
-            .catch(err => console.log(err));
-    };
+            .catch(err => {
+                if (err.response && err.response.data && err.response.data.error) {
+                    const errorMessage = err.response.data.error;
+                    setValidationErrors({ [errorMessage.toLowerCase()]: errorMessage });
+                } else {
+                    console.log(err);
+                }
+            });
+    };    
 
     return (
         <div className='h-screen flex items-center justify-center bg-gradient-to-tl from-gradient1 to-gradient2'>
