@@ -24,24 +24,44 @@ const db = mysql.createConnection({
     database:'website'
 })
 
-//Create Account
-app.post('/signup',(req,res) => {
-    const sql = "INSERT INTO user (`user_ID`,`username`,`email`,`password`) Values (?) ";
-    bcrypt.hash(req.body.password.toString(), salt, (err, hash) =>{
-        if(err) return res.json({Error:"Error for hasshing password"});
-    
-        const values = [
-            req.body.user_ID,
-            req.body.username,
-            req.body.email,
-            hash
-        ]
-        db.query(sql, [values], (err,result) =>{
-            if(err) return res.json({Error:"Inserting data Error in Server"});
-            return res.json({Status:"Success"});
-        })
-    })
-})
+// Create Account
+app.post('/signup', (req, res) => {
+    // Check if username or email already exists
+    const checkUserSql = "SELECT * FROM user WHERE username = ? OR email = ?";
+    const checkUserValues = [req.body.username, req.body.email];
+
+    db.query(checkUserSql, checkUserValues, (err, result) => {
+        if (err) return res.json({ error: "Database error" });
+
+        // If result is not empty, username or email already exists
+        if (result.length > 0) {
+            const existingUser = result[0];
+            if (existingUser.username === req.body.username) {
+                return res.json({ error: "Username already exists" });
+            } else {
+                return res.json({ error: "Email already exists" });
+            }
+        }
+
+        // If username and email are unique, proceed with user creation
+        const insertUserSql = "INSERT INTO user (`user_ID`,`username`,`email`,`password`) VALUES (?) ";
+        bcrypt.hash(req.body.password.toString(), salt, (hashErr, hash) => {
+            if (hashErr) return res.json({ error: "Error hashing password" });
+
+            const values = [
+                req.body.user_ID,
+                req.body.username,
+                req.body.email,
+                hash
+            ];
+
+            db.query(insertUserSql, [values], (insertErr, insertResult) => {
+                if (insertErr) return res.json({ error: "Inserting data error in server" });
+                return res.json({ status: "Success" });
+            });
+        });
+    });
+});
 
 //Middleware
 const verifyUser = (req, res, next) => {
