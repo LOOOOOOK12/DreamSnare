@@ -88,7 +88,7 @@ function Edit({ onClose, update, dream, dreamID }) {
         >
             <form className='px-16 py-8 flex flex-col bg-container2 rounded-md text-left transition-all '>
                 <div className='flex flex-col justify-center md:flex-row md:items-center gap-3'>
-                    <div className='flex items-center gap-2'>
+                    <div className='md:flex items-center gap-2'>
                         <label>Edit your Dream name:</label>
                         <div className='flex flex-col'>
                             <input
@@ -101,7 +101,7 @@ function Edit({ onClose, update, dream, dreamID }) {
                             {validationErrors.DreamName && <span className='text-error text-sm'>{validationErrors.DreamName}</span>}
                         </div>
                     </div>
-                    <div className='flex items-center gap-2'>
+                    <div className='md:flex items-center gap-2'>
                         <label>Edit Date Dreamt:</label>
                         <div className='flex flex-col'>
                             <input
