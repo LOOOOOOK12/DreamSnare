@@ -62,8 +62,8 @@ function Create({ onClose, user_ID }) {
                 onSubmit={handleSubmit}
                 className="px-16 py-8 flex flex-col bg-container2 rounded-md text-left transition-all ">
                 <div className='flex flex-col justify-center md:flex-row md:items-center gap-3'>
-                    <div className='flex items-center gap-2'>
-                        <label htmlFor="">Name your Dream:</label>
+                    <div className='md:flex items-center gap-2'>
+                        <label>Name your Dream:</label>
                         <div className='flex flex-col'>
                             <input
                                 type="text"
@@ -73,8 +73,8 @@ function Create({ onClose, user_ID }) {
                             {validationErrors.DreamName && <span className='text-error text-sm'>{validationErrors.DreamName}</span>}
                         </div>
                     </div>
-                    <div className='flex items-center gap-2'>
-                        <label htmlFor="">Date Dreamt:</label>
+                    <div className='md:flex items-center gap-3'>
+                        <label className=''>Date Dreamt:</label>
                         <div className='flex flex-col'>
                         <input
                             type='date'
