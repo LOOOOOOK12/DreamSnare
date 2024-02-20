@@ -58,6 +58,7 @@ function DreamContainer({ userName, dreamName, dreamDate, dreamDescription, drea
                 <h1>{dreamDate}</h1>
             </div>
             <textarea
+                style={{resize: "none"}}
                 disabled
                 rows={10}
                 cols={20}
