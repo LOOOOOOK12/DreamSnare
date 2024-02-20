@@ -118,6 +118,7 @@ function Edit({ onClose, update, dream, dreamID }) {
                 <label className='my-6'>Edit your dream!</label>
                 <textarea
                     name='DreamDescription'
+                    style={{resize: "none"}}
                     value={formData.DreamDescription}
                     rows={10}
                     cols={30}
