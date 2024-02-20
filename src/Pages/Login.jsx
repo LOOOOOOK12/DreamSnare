@@ -69,15 +69,18 @@ function Login() {
     };
 
     return (
-        <div className='h-screen flex justify-center items-center bg-gradient-to-tl from-gradient1 to-gradient2'>
+        <div className='h-screen flex flex-col justify-center items-center bg-background'>
             <form onSubmit={handleSubmit} className='px-10 py-14 flex flex-col justify-center gap-5 bg-slate-500 rounded-md bg-container2 text-text'>
+            <div className='flex items-center justify-center mb-5'>
+                <h1 className='text-text text-4xl font-semibold'>DreamSnare</h1>
+            </div>
             <div className='flex flex-col'>
                     <label htmlFor='email' className='mb-2'>Enter E-mail:</label>
                     <input
                         type="email"
                         placeholder='you@example.com'
                         name="email"
-                        className={`py-1 px-1 rounded-md bg-container2 border-2 ${formValid && !errors.email ? 'border-accent' : 'border-error'} focus:outline-none focus:border-secondary`}
+                        className={`py-1 px-2 rounded-md bg-container2 border-2 ${formValid && !errors.email ? 'border-accent' : 'border-error'} focus:outline-none focus:border-secondary`}
                         onChange={handleChange}
                     />
                     {!formValid && errors.email && <span className="text-error text-sm">{errors.email}</span>}
@@ -87,7 +90,7 @@ function Login() {
                     <input
                         type="password"
                         name="password"
-                        className={`py-1 px-1 rounded-md bg-container2 border-2 ${formValid && !errors.password ? 'border-accent' : 'border-error'} focus:outline-none focus:border-secondary`}
+                        className={`py-1 px-2 rounded-md bg-container2 border-2 ${formValid && !errors.password ? 'border-accent' : 'border-error'} focus:outline-none focus:border-secondary`}
                         onChange={handleChange}
                     />
                     {!formValid && errors.password && <span className="text-error text-sm">{errors.password}</span>}
