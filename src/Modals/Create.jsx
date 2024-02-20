@@ -87,6 +87,7 @@ function Create({ onClose, user_ID }) {
                 </div>
                 <label className='my-6'>Describe your dream!</label>
                 <textarea
+                    style={{resize: "none"}}
                     type='text'
                     name='DreamDescription'
                     rows={10} cols={30}
