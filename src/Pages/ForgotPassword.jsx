@@ -12,7 +12,7 @@ function ForgotPassword() {
                 </div>
                 <div className='w-full justify-items-end flex gap-2'>
                     <Link to='/'><button className='py-2 px-5 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300' >Cancel</button></Link>
-                    <button className='py-2 px-5 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Search</button>
+                    <Link to='/'><button className='py-2 px-5 rounded-md text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Search</button></Link>
                 </div>
             </div>
         </div>
