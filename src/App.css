@@ -3,6 +3,7 @@
 *{
     font-family: 'Lora', serif;
     font-family: 'Noto Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body{
