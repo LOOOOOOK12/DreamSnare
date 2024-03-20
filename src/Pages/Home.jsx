@@ -37,7 +37,7 @@ function Home() {
     return (
         <div className='bg-background flex flex-col justify-center'>
             <Navbar/>
-            <div className="pt-48 px-12 w-full text-center flex flex-col items-center justify-center">
+            <div id="Home" className="pt-48 px-12 w-full text-center flex flex-col items-center justify-center">
                 {
                     auth ?
                         <div className="flex justify-center items-center">
