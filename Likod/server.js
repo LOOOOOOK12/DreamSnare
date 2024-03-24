@@ -9,6 +9,15 @@ require('dotenv').config()
 const salt = 10;
 
 const app = express()
+
+app.use("/", (req,res) => {
+    res.send("LOBOT")
+})
+
+app.listen(8001, ()=> {
+    console.log("Server is Open")
+})
+
 app.use(cors({
     origin: ["http://localhost:5173"],
     methods: ["POST", "GET","PUT", "DELETE"],
@@ -178,10 +187,3 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
     });
 });
 
-app.use("/", (req,res) => {
-    res.send("LOBOT")
-})
-
-app.listen(8001, ()=> {
-    console.log("Server is Open")
-})
