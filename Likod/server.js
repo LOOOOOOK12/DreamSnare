@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 const db = mysql.createConnection({
-    host:'localhost',
+    host:'https://dream-snare-api.vercel.app',
     user:"root",
     password:'',
     database:'website'
