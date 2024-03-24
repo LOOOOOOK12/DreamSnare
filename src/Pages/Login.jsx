@@ -97,7 +97,7 @@ function Login() {
             </div>
                 <div className='flex flex-col'>
                     <button type="submit" className='w-full py-3 rounded-md font-semibold text-background bg-primary text-white hover:bg-accent ease-in-out duration-300'>Log-In</button>
-                    <Link to='/ForgotPassword'><p className='text-sm text-right mt-2'>Forgot Password?</p></Link>
+                    {/* <Link to='/ForgotPassword'><p className='text-sm text-right mt-2'>Forgot Password?</p></Link> */}
                 </div>
                 <Link to="/SignUp">Don't have an account? <span className='font-semibold'>Sign Up</span></Link>
             </form>
