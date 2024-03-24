@@ -26,7 +26,7 @@ const db = mysql.createConnection({
 })
 
 app.use("/", (req,res) => {
-    res.json("LOBOT")
+    res.send("LOBOT")
 })
 
 // Create Account
