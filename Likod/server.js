@@ -17,12 +17,8 @@ app.use(cors({
     //https://dream-snare-api.vercel.app - domain
     //"http://localhost:5173" - local host  
 
-
-
 app.use(express.json())
 app.use(cookieParser())
-
-
 
 const db = mysql.createConnection({
     host:'localhost',
