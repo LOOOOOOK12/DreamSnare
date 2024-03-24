@@ -10,19 +10,19 @@ const salt = 10;
 
 const app = express()
 
-app.use("/", (req,res) => {
-    res.send("LOBOT")
-})
-
 app.listen(8001, ()=> {
     console.log("Server is Open")
 })
 
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:8001"],
     methods: ["POST", "GET","PUT", "DELETE"],
     credentials: true
 }));
+
+app.get("/", (req,res) => {
+    res.send("LOBOT")
+})
 
 app.use(express.json())
 app.use(cookieParser())
