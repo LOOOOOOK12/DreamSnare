@@ -9,19 +9,14 @@ require('dotenv').config()
 const salt = 10;
 
 const app = express()
-
-app.listen(8001, ()=> {
-    console.log("Server is Open")
-})
-
 app.use(cors({
-    origin: ["http://localhost:8001"],
+    origin: ["http://localhost:5173"],
     methods: ["POST", "GET","PUT", "DELETE"],
     credentials: true
 }));
 
-app.get("/", (req,res) => {
-    res.send("LOBOT")
+app.get("/",(req,res) =>{
+    res.json("Hello");
 })
 
 app.use(express.json())
@@ -187,3 +182,8 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
     });
 });
 
+
+
+app.listen(8001, ()=> {
+    console.log("Server is Open")
+})
