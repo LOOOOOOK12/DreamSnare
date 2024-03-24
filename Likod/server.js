@@ -25,10 +25,6 @@ const db = mysql.createConnection({
     database:'website'
 })
 
-app.use("/", (req,res) => {
-    res.send("LOBOT")
-})
-
 // Create Account
 app.post('/signup', (req, res) => {
     // Check if username or email already exists
@@ -181,6 +177,10 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
         return res.json("deleted");
     });
 });
+
+app.use("/", (req,res) => {
+    res.send("LOBOT")
+})
 
 app.listen(8001, ()=> {
     console.log("Server is Open")
