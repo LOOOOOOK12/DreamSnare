@@ -45,7 +45,7 @@ function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-    
+
         if (validateInputs()) {
             axios.post('http://localhost:8001/', values)
                 .then(res => {

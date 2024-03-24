@@ -10,11 +10,10 @@ function Home() {
     const [message, setMessage] = useState('')
     const [username, setUserName] = useState('')
     // const [userID, setUserID] = useState('')
-
+    
     axios.defaults.withCredentials = true
-
     useEffect(() => {
-        axios.get('http://localhost:8001')
+        axios.get('http://localhost:8001/')
             .then(res => {
                 if (res.data.Status === "Success") {
                     setAuth(true);
@@ -27,13 +26,14 @@ function Home() {
             })
             .catch(err => console.log(err));
     }, []);
-
     useEffect(() => {
         axios.get('http://localhost:8001/getDreams')
             .then(res => setDreams(res.data))
             .catch(err => console.log(err));
     }, [auth, username]);
 
+    console.log(auth)
+                    console.log(username)
     return (
         <div className='bg-background flex flex-col justify-center'>
             <Navbar/>
@@ -46,7 +46,7 @@ function Home() {
                         
                     :
                         <div className="flex justify-center items-center">
-                            <h1 className="text-text text-5xl text-center">may problem--- {message}</h1>
+                            <h1 className="text-text text-5xl text-center">may problem {message}</h1>
                         </div>
                         
                 }

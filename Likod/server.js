@@ -15,9 +15,6 @@ app.use(cors({
     credentials: true
 }));
 
-app.get("/",(req,res) =>{
-    res.json("Hello");
-})
 
 app.use(express.json())
 app.use(cookieParser())
@@ -102,9 +99,10 @@ app.post('/', (req, res) => {
                 if(response){
                     const user_ID = data[0].user_ID;
                     const username = data[0].username;
-                    const token = jwt.sign({user_ID,username}, process.env.SECRET_KEY, {expiresIn: '1d'})
+                    const token = jwt.sign({user_ID, username}, process.env.SECRET_KEY, {expiresIn: '1d'})
+                    console.log(username,user_ID)
                     res.cookie('token', token)
-                    return res.json({Status: "Success"})
+                    return res.json({Status: "Success", username})
                 } else{
                     return res.json({Error: "Password not match"})
                 }
@@ -114,6 +112,7 @@ app.post('/', (req, res) => {
         }
     })
 })
+
 
 //LOGOUT
 app.get('/logout',(req,res) => {
@@ -183,6 +182,9 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
 });
 
 
+app.get("/",(req,res) =>{
+    res.json("Hello");
+})
 
 app.listen(8001, ()=> {
     console.log("Server is Open")
