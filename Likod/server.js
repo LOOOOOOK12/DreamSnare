@@ -178,8 +178,6 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
     });
 });
 
-
-
 app.listen(8001, ()=> {
     console.log("Server is Open")
 })
