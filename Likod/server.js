@@ -14,8 +14,10 @@ app.use(cors({
     methods: ["POST", "GET","PUT", "DELETE"],
     credentials: true
 }));
-    //https://dream-snare-api.vercel.app - domain
-    //"http://localhost:5173" - local host  
+
+app.get("/",(req,res) =>{
+    res.json("Hello");
+})
 
 app.use(express.json())
 app.use(cookieParser())
@@ -25,10 +27,6 @@ const db = mysql.createConnection({
     user:"root",
     password:'',
     database:'website'
-})
-
-app.get("/",(req,res)=>{
-    res.json("Hello");
 })
 
 // Create Account
@@ -183,6 +181,8 @@ app.delete('/deleteDream/:dream_ID', (req, res) => {
         return res.json("deleted");
     });
 });
+
+
 
 app.listen(8001, ()=> {
     console.log("Server is Open")
