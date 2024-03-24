@@ -70,7 +70,7 @@ function Edit({ onClose, update, dream, dreamID }) {
         setValidationErrors({});
 
         axios
-            .put(`http://localhost:8001/editDream/${dreamID}`, formData)
+            .put(`https://dream-snare-api.vercel.app/editDream/${dreamID}`, formData)
             .then((res) => {
                 console.log('Dream Updated');
                 update(formData);
