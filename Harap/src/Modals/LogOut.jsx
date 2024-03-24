@@ -13,7 +13,7 @@ function LogOut({onClose}) {
     }
 
     const handleDelete = () =>{
-        axios.get('https://dream-snare-api.vercel.app/logout')
+        axios.get('http://localhost:8001/logout')
         .then(res => {
             location.reload(true)
         }).catch(err => console.log(err))

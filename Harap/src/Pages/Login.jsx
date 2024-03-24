@@ -47,7 +47,7 @@ function Login() {
         event.preventDefault();
     
         if (validateInputs()) {
-            axios.post('https://dream-snare-api.vercel.app/', values)
+            axios.post('http://localhost:8001/', values)
                 .then(res => {
                     if (res.data.Status === "Success") {
                         console.log("Registered Successfully!");

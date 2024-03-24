@@ -14,7 +14,7 @@ function Home() {
     axios.defaults.withCredentials = true
 
     useEffect(() => {
-        axios.get('https://dream-snare-api.vercel.app')
+        axios.get('http://localhost:8001')
             .then(res => {
                 if (res.data.Status === "Success") {
                     setAuth(true);
@@ -27,9 +27,9 @@ function Home() {
             })
             .catch(err => console.log(err));
     }, []);
-//http://localhost:8001
+
     useEffect(() => {
-        axios.get('https://dream-snare-api.vercel.app/getDreams')
+        axios.get('http://localhost:8001/getDreams')
             .then(res => setDreams(res.data))
             .catch(err => console.log(err));
     }, [auth, username]);
