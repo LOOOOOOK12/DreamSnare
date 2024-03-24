@@ -10,11 +10,11 @@ const salt = 10;
 
 const app = express()
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://dream-snare-api.vercel.app"],
     methods: ["POST", "GET","PUT", "DELETE"],
     credentials: true
 }));
-    //dream-snare-api.vercel.app - domain
+    //https://dream-snare-api.vercel.app - domain
     //"http://localhost:5173" - local host  
 app.get("/",(req,res) =>{
     res.json("Hello");
