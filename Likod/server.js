@@ -25,6 +25,10 @@ const db = mysql.createConnection({
     database:'website'
 })
 
+app.use("/", (req,res) => {
+    res.json("LOBOT")
+})
+
 // Create Account
 app.post('/signup', (req, res) => {
     // Check if username or email already exists
