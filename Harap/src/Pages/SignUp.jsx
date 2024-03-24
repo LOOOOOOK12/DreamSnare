@@ -43,7 +43,7 @@ function SignUp() {
     
         setValidationErrors({});
     
-        axios.post('http://localhost:8001/signup', values)
+        axios.post('https://dream-snare-api.vercel.app/signup', values)
             .then(res => {
                 console.log('Registered Successfully!');
                 navigate('/');
