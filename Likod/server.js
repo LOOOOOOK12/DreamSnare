@@ -16,6 +16,7 @@ app.use(cors({
 }));
     //https://dream-snare-api.vercel.app - domain
     //"http://localhost:5173" - local host  
+
 app.get("/",(req,res) =>{
     res.json("Hello");
 })
