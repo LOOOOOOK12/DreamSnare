@@ -22,10 +22,10 @@ app.use(cookieParser())
 let dev = true
 
 const db = mysql.createConnection({
-    host: !dev ? 'roundhouse.proxy.rlwy.net'  : "localhost",
+    host:"localhost",
     user:"root",
-    password: !dev ? 'qDVLXRavbcHCaZIKxdmVipgJtNtDjuAR': "" ,
-    database: !dev ? 'railway': 'website'
+    password:"" ,
+    database:'website'
 })
 
 // Create Account
