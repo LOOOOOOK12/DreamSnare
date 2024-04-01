@@ -19,11 +19,13 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
+let dev = true
+
 const db = mysql.createConnection({
-    host:'localhost',
+    host: !dev ? 'roundhouse.proxy.rlwy.net'  : "localhost",
     user:"root",
-    password:'',
-    database:'website'
+    password: !dev ? 'qDVLXRavbcHCaZIKxdmVipgJtNtDjuAR': "" ,
+    database: !dev ? 'railway': 'website'
 })
 
 // Create Account
